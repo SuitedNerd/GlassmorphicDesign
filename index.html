@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Title Here</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    :root {
+      --bg-color: #0a0a0a;
+      --bg-gradient: radial-gradient(1200px 600px at 50% 0%, #1a1a1a, #0a0a0a);
+      --card-bg: rgba(20, 20, 20, 0.6);
+      --text-color: #f5f5f5;
+      --button-bg: linear-gradient(180deg, #ffffff, #dcdcdc);
+      --button-text: #0a0a0a;
+      --navbar-bg: rgba(30, 30, 30, 0.4);
+      --footer-bg: rgba(30, 30, 30, 0.4);
+      --accent: #ff7b00;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-gradient);
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      width: calc(100% - 32px);
+      backdrop-filter: blur(30px) saturate(1.5);
+      -webkit-backdrop-filter: blur(30px) saturate(1.5);
+      background: var(--navbar-bg);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      margin: 10px 16px;
+      z-index: 20;
+      animation: slideDown 0.6s ease forwards;
+      opacity: 0;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-title {
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text-color);
+    }
+
+    .nav-links a {
+      margin-left: 22px;
+      text-decoration: none;
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1000px;
+    }
+
+    .card-wrapper {
+      position: relative;
+      padding: 1px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(0,0,0,0.1), rgba(0,0,0,0.85));
+      filter: drop-shadow(0 24px 48px rgba(0,0,0,0.25));
+      transform-style: preserve-3d;
+      animation: floatCard 3s ease-in-out infinite;
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(24px) saturate(1.6);
+      -webkit-backdrop-filter: blur(24px) saturate(1.6);
+      padding: 56px 64px;
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.2);
+      transform: translateZ(0);
+      transition: transform 0.4s cubic-bezier(.25,.8,.25,1), box-shadow 0.4s cubic-bezier(.25,.8,.25,1);
+    }
+
+    .card:hover {
+      transform: translateY(-10px) rotateX(2deg) rotateY(2deg);
+      box-shadow: 0 32px 64px rgba(0,0,0,0.35);
+    }
+
+    h1 {
+      margin: 0 0 32px 0;
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-color);
+    }
+
+    button {
+      padding: 14px 36px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      transform-style: preserve-3d;
+      transition: all 0.25s cubic-bezier(.25,.8,.25,1);
+    }
+
+    button:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 14px 36px rgba(0,0,0,0.3);
+    }
+
+    button:active {
+      transform: translateY(0) scale(0.97);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 24px 16px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(28px) saturate(1.6);
+      -webkit-backdrop-filter: blur(28px) saturate(1.6);
+      background: var(--footer-bg);
+      border-radius: 20px;
+      margin: 10px 16px;
+      animation: slideUp 0.6s ease forwards;
+      opacity: 0;
+    }
+
+    /* Animations */
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%);
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <span class="nav-title">Title Here</span>
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Credits</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="card-wrapper">
+      <div class="card">
+        <h1>Text Here</h1>
+        <button>Text Here</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    ©2026 · Credits to <strong>Name Here</strong>
+  </footer>
+
+  <script>
+    const card = document.querySelector('.card-wrapper');
+    document.addEventListener('mousemove', e => {
+      const x = (window.innerWidth / 2 - e.clientX) / 40;
+      const y = (window.innerHeight / 2 - e.clientY) / 40;
+      card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+    });
+  </script>
+</body>
+</html>
