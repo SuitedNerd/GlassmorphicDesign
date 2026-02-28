@@ -17,7 +17,7 @@ A **modern, professional, and fully responsive Glassmorphic Design** template bu
 
 ## Demo
 
-You can view a live demo [here](./assets/demo.mp4).
+You can view a live demo in [this video](./assets/demo.mp4).
 
 ---
 
